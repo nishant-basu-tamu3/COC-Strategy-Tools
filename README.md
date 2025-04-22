@@ -12,20 +12,33 @@ A comprehensive strategy tool for Clash of Clans using RAG (Retrieval Augmented 
 ## Project Structure
 
 ```
-coc-strategy-tools/
-├── data/               # Data files
-│   ├── raw/            # Raw scraped data
-│   ├── processed/      # Processed data and embeddings
-│   └── chroma_db/      # Vector database
-├── src/
-│   ├── app.js          # Express server entry point
-│   ├── config/         # Configuration files
-│   ├── data-collection/# Web scraping tools
-│   ├── data-processing/# Data processing and embedding generation
-│   ├── strategy-advisor/# Strategy advisor service
-│   └── strategy-simulator/# Battle simulator service
+COC-Strategy-Tools/
+├── backend/            # Node.js Express backend
+│   ├── data/           # Data files 
+│   │   ├── raw/        # Raw scraped data
+│   │   ├── processed/  # Processed data and embeddings
+│   │   └── chroma_db/  # Vector database
+│   └── src/            # Backend source code
+│       ├── app.js      # Express server entry point
+│       ├── config/     # Configuration files
+│       ├── data-collection/ # Web scraping tools
+│       ├── data-processing/ # Data processing and embedding generation
+│       ├── strategy-advisor/ # Strategy advisor service
+│       └── strategy-simulator/ # Battle simulator service
 └── frontend/           # Vue.js frontend application
+    ├── public/         # Static assets
+    └── src/            # Frontend source code
+        ├── assets/     # Images and resources
+        ├── components/ # Vue components
+        ├── views/      # Vue views/pages
+        ├── router/     # Vue Router configuration
+        ├── services/   # API service modules
+        └── types/      # TypeScript type definitions
 ```
+
+## Repository
+
+GitHub: https://github.com/nishant-basu-tamu3/COC-Strategy-Tools.git
 
 ## Setup Instructions
 
@@ -39,8 +52,8 @@ coc-strategy-tools/
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/coc-strategy-tools.git
-   cd coc-strategy-tools
+   git clone https://github.com/nishant-basu-tamu3/COC-Strategy-Tools.git
+   cd COC-Strategy-Tools/backend
    ```
 
 2. Install dependencies:
@@ -49,8 +62,7 @@ coc-strategy-tools/
    ```
 
 3. Configure environment variables:
-   - Copy `.env.example` to `.env`
-   - Set your LLM provider and API keys
+   - Set your LLM provider and API keys in the .env file
 
 4. Run data collection (optional, data is included):
    ```
@@ -73,7 +85,7 @@ The server will run on http://localhost:3000 by default.
 
 1. Navigate to the frontend directory:
    ```
-   cd frontend
+   cd ../frontend
    ```
 
 2. Install dependencies:
