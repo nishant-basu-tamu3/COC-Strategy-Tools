@@ -1,0 +1,35 @@
+{
+  "name": "clash-simulator",
+  "version": "1.0.0",
+  "main": "src/app.js",
+  "scripts": {
+    "scrape": "node src/data-collection/complete-scraper.js",
+    "process": "node src/data-processing/process-data.js",
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "test:simulator": "node src/strategy-simulator/example.js",
+    "test:advisor": "node src/strategy-advisor/example.js",
+    "clean": "if exist data\\*.json del data\\*.json && if exist data\\raw\\* del data\\raw\\*",
+    "clean:chroma": "if exist data\\chroma_db\\* del data\\chroma_db\\*",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "A Clash of Clans strategy simulator and advisor using RAG and LLMs",
+  "dependencies": {
+    "@google/generative-ai": "^0.1.3",
+    "@langchain/google-genai": "^0.2.4",
+    "axios": "^1.6.2",
+    "cheerio": "^1.0.0-rc.12",
+    "chromadb": "^1.5.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "fs-extra": "^11.1.1",
+    "langchain": "^0.0.127"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

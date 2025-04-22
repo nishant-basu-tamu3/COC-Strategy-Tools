@@ -1,0 +1,909 @@
+{
+    "townHallData": {
+      "9": {
+        "level": 9,
+        "maxHousing": 220,
+        "maxSpellSpace": 9,
+        "availableTroops": [
+          "Barbarian",
+          "Archer",
+          "Giant",
+          "Goblin",
+          "Wall Breaker",
+          "Balloon",
+          "Wizard",
+          "Healer",
+          "Dragon",
+          "P.E.K.K.A",
+          "Baby Dragon",
+          "Miner"
+        ],
+        "availableSpells": [
+          "Lightning Spell",
+          "Healing Spell",
+          "Rage Spell",
+          "Jump Spell",
+          "Freeze Spell",
+          "Poison Spell",
+          "Earthquake Spell",
+          "Haste Spell"
+        ],
+        "availableHeroes": ["Barbarian King", "Archer Queen"],
+        "maxHeroLevels": {
+          "Barbarian King": 30,
+          "Archer Queen": 30
+        }
+      },
+      "10": {
+        "level": 10,
+        "maxHousing": 240,
+        "maxSpellSpace": 10,
+        "availableTroops": [
+          "Barbarian",
+          "Archer",
+          "Giant",
+          "Goblin",
+          "Wall Breaker",
+          "Balloon",
+          "Wizard",
+          "Healer",
+          "Dragon",
+          "P.E.K.K.A",
+          "Baby Dragon",
+          "Miner",
+          "Electro Dragon",
+          "Yeti"
+        ],
+        "availableSpells": [
+          "Lightning Spell",
+          "Healing Spell",
+          "Rage Spell",
+          "Jump Spell",
+          "Freeze Spell",
+          "Clone Spell",
+          "Poison Spell",
+          "Earthquake Spell",
+          "Haste Spell",
+          "Skeleton Spell",
+          "Bat Spell"
+        ],
+        "availableHeroes": ["Barbarian King", "Archer Queen"],
+        "maxHeroLevels": {
+          "Barbarian King": 40,
+          "Archer Queen": 40
+        }
+      },
+      "11": {
+        "level": 11,
+        "maxHousing": 260,
+        "maxSpellSpace": 11,
+        "availableTroops": [
+          "Barbarian",
+          "Archer",
+          "Giant",
+          "Goblin",
+          "Wall Breaker",
+          "Balloon",
+          "Wizard",
+          "Healer",
+          "Dragon",
+          "P.E.K.K.A",
+          "Baby Dragon",
+          "Miner",
+          "Electro Dragon",
+          "Yeti",
+          "Ice Golem",
+          "Super Troops"
+        ],
+        "availableSpells": [
+          "Lightning Spell",
+          "Healing Spell",
+          "Rage Spell",
+          "Jump Spell",
+          "Freeze Spell",
+          "Clone Spell",
+          "Poison Spell",
+          "Earthquake Spell",
+          "Haste Spell",
+          "Skeleton Spell",
+          "Bat Spell"
+        ],
+        "availableHeroes": ["Barbarian King", "Archer Queen", "Grand Warden"],
+        "maxHeroLevels": {
+          "Barbarian King": 50,
+          "Archer Queen": 50,
+          "Grand Warden": 20
+        }
+      },
+      "12": {
+        "level": 12,
+        "maxHousing": 280,
+        "maxSpellSpace": 11,
+        "availableTroops": [
+          "Barbarian",
+          "Archer",
+          "Giant",
+          "Goblin",
+          "Wall Breaker",
+          "Balloon",
+          "Wizard",
+          "Healer",
+          "Dragon",
+          "P.E.K.K.A",
+          "Baby Dragon",
+          "Miner",
+          "Electro Dragon",
+          "Yeti",
+          "Ice Golem",
+          "Super Troops",
+          "Dragon Rider"
+        ],
+        "availableSpells": [
+          "Lightning Spell",
+          "Healing Spell",
+          "Rage Spell",
+          "Jump Spell",
+          "Freeze Spell",
+          "Clone Spell",
+          "Poison Spell",
+          "Earthquake Spell",
+          "Haste Spell",
+          "Skeleton Spell",
+          "Bat Spell",
+          "Invisibility Spell"
+        ],
+        "availableHeroes": [
+          "Barbarian King",
+          "Archer Queen",
+          "Grand Warden",
+          "Royal Champion"
+        ],
+        "maxHeroLevels": {
+          "Barbarian King": 65,
+          "Archer Queen": 65,
+          "Grand Warden": 40,
+          "Royal Champion": 20
+        }
+      },
+      "13": {
+        "level": 13,
+        "maxHousing": 300,
+        "maxSpellSpace": 12,
+        "availableTroops": [
+          "Barbarian",
+          "Archer",
+          "Giant",
+          "Goblin",
+          "Wall Breaker",
+          "Balloon",
+          "Wizard",
+          "Healer",
+          "Dragon",
+          "P.E.K.K.A",
+          "Baby Dragon",
+          "Miner",
+          "Electro Dragon",
+          "Yeti",
+          "Ice Golem",
+          "Super Troops",
+          "Dragon Rider",
+          "Electro Titan"
+        ],
+        "availableSpells": [
+          "Lightning Spell",
+          "Healing Spell",
+          "Rage Spell",
+          "Jump Spell",
+          "Freeze Spell",
+          "Clone Spell",
+          "Poison Spell",
+          "Earthquake Spell",
+          "Haste Spell",
+          "Skeleton Spell",
+          "Bat Spell",
+          "Invisibility Spell"
+        ],
+        "availableHeroes": [
+          "Barbarian King",
+          "Archer Queen",
+          "Grand Warden",
+          "Royal Champion"
+        ],
+        "maxHeroLevels": {
+          "Barbarian King": 80,
+          "Archer Queen": 80,
+          "Grand Warden": 55,
+          "Royal Champion": 30
+        }
+      },
+      "14": {
+        "level": 14,
+        "maxHousing": 320,
+        "maxSpellSpace": 13,
+        "availableTroops": [
+          "Barbarian",
+          "Archer",
+          "Giant",
+          "Goblin",
+          "Wall Breaker",
+          "Balloon",
+          "Wizard",
+          "Healer",
+          "Dragon",
+          "P.E.K.K.A",
+          "Baby Dragon",
+          "Miner",
+          "Electro Dragon",
+          "Yeti",
+          "Ice Golem",
+          "Super Troops",
+          "Dragon Rider",
+          "Electro Titan",
+          "Root Rider",
+          "Battle Ram"
+        ],
+        "availableSpells": [
+          "Lightning Spell",
+          "Healing Spell",
+          "Rage Spell",
+          "Jump Spell",
+          "Freeze Spell",
+          "Clone Spell",
+          "Poison Spell",
+          "Earthquake Spell",
+          "Haste Spell",
+          "Skeleton Spell",
+          "Bat Spell",
+          "Invisibility Spell",
+          "Recall Spell"
+        ],
+        "availableHeroes": [
+          "Barbarian King",
+          "Archer Queen",
+          "Grand Warden",
+          "Royal Champion"
+        ],
+        "maxHeroLevels": {
+          "Barbarian King": 85,
+          "Archer Queen": 85,
+          "Grand Warden": 60,
+          "Royal Champion": 35
+        }
+      },
+      "15": {
+        "level": 15,
+        "maxHousing": 340,
+        "maxSpellSpace": 14,
+        "availableTroops": [
+          "Barbarian",
+          "Archer",
+          "Giant",
+          "Goblin",
+          "Wall Breaker",
+          "Balloon",
+          "Wizard",
+          "Healer",
+          "Dragon",
+          "P.E.K.K.A",
+          "Baby Dragon",
+          "Miner",
+          "Electro Dragon",
+          "Yeti",
+          "Ice Golem",
+          "Super Troops",
+          "Dragon Rider",
+          "Electro Titan",
+          "Root Rider",
+          "Battle Ram",
+          "Mountain Golem"
+        ],
+        "availableSpells": [
+          "Lightning Spell",
+          "Healing Spell",
+          "Rage Spell",
+          "Jump Spell",
+          "Freeze Spell",
+          "Clone Spell",
+          "Poison Spell",
+          "Earthquake Spell",
+          "Haste Spell",
+          "Skeleton Spell",
+          "Bat Spell",
+          "Invisibility Spell",
+          "Recall Spell",
+          "Overpowering Spell"
+        ],
+        "availableHeroes": [
+          "Barbarian King",
+          "Archer Queen",
+          "Grand Warden",
+          "Royal Champion"
+        ],
+        "maxHeroLevels": {
+          "Barbarian King": 90,
+          "Archer Queen": 90,
+          "Grand Warden": 65,
+          "Royal Champion": 40
+        }
+      }
+    },
+    "troopHousing": {
+      "Barbarian": 1,
+      "Archer": 1,
+      "Giant": 5,
+      "Goblin": 1,
+      "Wall Breaker": 2,
+      "Balloon": 5,
+      "Wizard": 4,
+      "Healer": 14,
+      "Dragon": 20,
+      "P.E.K.K.A": 25,
+      "Baby Dragon": 10,
+      "Miner": 6,
+      "Electro Dragon": 30,
+      "Yeti": 18,
+      "Ice Golem": 15,
+      "Dragon Rider": 25,
+      "Electro Titan": 32,
+      "Root Rider": 20,
+      "Battle Ram": 8,
+      "Mountain Golem": 30
+    },
+    "spellSpace": {
+      "Lightning Spell": 1,
+      "Healing Spell": 2,
+      "Rage Spell": 2,
+      "Jump Spell": 2,
+      "Freeze Spell": 1,
+      "Clone Spell": 3,
+      "Poison Spell": 1,
+      "Earthquake Spell": 1,
+      "Haste Spell": 1,
+      "Skeleton Spell": 1,
+      "Bat Spell": 1,
+      "Invisibility Spell": 1,
+      "Recall Spell": 2,
+      "Overpowering Spell": 3
+    },
+    "maxTroopLevels": {
+      "Barbarian": { "9": 7, "10": 8, "11": 9, "12": 10, "13": 11, "14": 12, "15": 13 },
+      "Archer": { "9": 7, "10": 8, "11": 9, "12": 10, "13": 11, "14": 12, "15": 13 },
+      "Giant": { "9": 8, "10": 9, "11": 10, "12": 11, "13": 12, "14": 13, "15": 14 },
+      "Goblin": { "9": 7, "10": 8, "11": 9, "12": 10, "13": 11, "14": 12, "15": 13 },
+      "Wall Breaker": { "9": 6, "10": 7, "11": 8, "12": 9, "13": 10, "14": 11, "15": 12 },
+      "Balloon": { "9": 7, "10": 8, "11": 9, "12": 10, "13": 11, "14": 12, "15": 13 },
+      "Wizard": { "9": 7, "10": 8, "11": 9, "12": 10, "13": 11, "14": 12, "15": 13 },
+      "Healer": { "9": 5, "10": 6, "11": 7, "12": 8, "13": 9, "14": 10, "15": 11 },
+      "Dragon": { "9": 5, "10": 6, "11": 7, "12": 8, "13": 9, "14": 10, "15": 11 },
+      "P.E.K.K.A": { "9": 6, "10": 7, "11": 8, "12": 9, "13": 10, "14": 11, "15": 12 },
+      "Baby Dragon": { "9": 4, "10": 5, "11": 6, "12": 7, "13": 8, "14": 9, "15": 10 },
+      "Miner": { "9": 4, "10": 5, "11": 6, "12": 7, "13": 8, "14": 9, "15": 10 },
+      "Electro Dragon": { "9": 0, "10": 3, "11": 4, "12": 5, "13": 6, "14": 7, "15": 8 },
+      "Yeti": { "9": 0, "10": 2, "11": 3, "12": 4, "13": 5, "14": 6, "15": 7 },
+      "Ice Golem": { "9": 0, "10": 0, "11": 3, "12": 4, "13": 5, "14": 6, "15": 7 },
+      "Dragon Rider": { "9": 0, "10": 0, "11": 0, "12": 3, "13": 4, "14": 5, "15": 6 },
+      "Electro Titan": { "9": 0, "10": 0, "11": 0, "12": 0, "13": 3, "14": 4, "15": 5 },
+      "Root Rider": { "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 3, "15": 4 },
+      "Battle Ram": { "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 3, "15": 4 },
+      "Mountain Golem": { "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 3 }
+    },
+    "maxSpellLevels": {
+      "Lightning Spell": { "9": 6, "10": 7, "11": 8, "12": 9, "13": 10, "14": 11, "15": 12 },
+      "Healing Spell": { "9": 6, "10": 7, "11": 8, "12": 9, "13": 10, "14": 11, "15": 12 },
+      "Rage Spell": { "9": 5, "10": 5, "11": 6, "12": 7, "13": 8, "14": 9, "15": 10 },
+      "Jump Spell": { "9": 3, "10": 3, "11": 4, "12": 5, "13": 6, "14": 7, "15": 8 },
+      "Freeze Spell": { "9": 4, "10": 5, "11": 6, "12": 7, "13": 8, "14": 9, "15": 10 },
+      "Clone Spell": { "9": 0, "10": 3, "11": 4, "12": 5, "13": 6, "14": 7, "15": 8 },
+      "Poison Spell": { "9": 3, "10": 4, "11": 5, "12": 6, "13": 8, "14": 9, "15": 10 },
+      "Earthquake Spell": { "9": 3, "10": 4, "11": 5, "12": 6, "13": 7, "14": 8, "15": 9 },
+      "Haste Spell": { "9": 3, "10": 4, "11": 5, "12": 6, "13": 7, "14": 8, "15": 9 },
+      "Skeleton Spell": { "9": 0, "10": 3, "11": 4, "12": 5, "13": 6, "14": 7, "15": 8 },
+      "Bat Spell": { "9": 3, "10": 4, "11": 5, "12": 6, "13": 7, "14": 8, "15": 9 },
+      "Invisibility Spell": { "9": 0, "10": 0, "11": 0, "12": 3, "13": 4, "14": 5, "15": 6 },
+      "Recall Spell": { "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 3, "15": 4 },
+      "Overpowering Spell": { "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 3 }
+    },
+    "siegeMachines": [
+      "Stone Slammer",
+      "Wall Wrecker",
+      "Battle Blimp",
+      "Log Launcher",
+      "Flame Flinger",
+      "Battle Drill"
+    ],
+    "baseLayouts": [
+      "Ring Base", 
+      "Box Base", 
+      "Diamond Base", 
+      "Island Base"
+    ],
+    "defaultToggleOptions": [
+      { "label": "Max defense levels", "enabled": true },
+      { "label": "Enable traps", "enabled": true },
+      { "label": "Enable Clan Castle troops", "enabled": true }
+    ],
+    "defaultArmies": {
+      "9": {
+        "townHall": 9,
+        "troops": [
+          {
+            "name": "Balloon",
+            "level": 6,
+            "maxLevel": 6,
+            "quantity": 24,
+            "housing": 5
+          },
+          {
+            "name": "Wizard",
+            "level": 6,
+            "maxLevel": 6,
+            "quantity": 15,
+            "housing": 4
+          }
+        ],
+        "spells": [
+          {
+            "name": "Rage Spell",
+            "level": 5,
+            "maxLevel": 5,
+            "quantity": 2,
+            "housing": 2
+          },
+          {
+            "name": "Freeze Spell",
+            "level": 2,
+            "maxLevel": 2,
+            "quantity": 1,
+            "housing": 1
+          }
+        ],
+        "heroes": [
+          {
+            "name": "Barbarian King",
+            "level": 20,
+            "levels": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
+            "upgrading": false
+          },
+          {
+            "name": "Archer Queen",
+            "level": 15,
+            "levels": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
+            "upgrading": false
+          }
+        ],
+        "siegeMachine": "Stone Slammer"
+      },
+      "11": {
+        "townHall": 11,
+        "troops": [
+          {
+            "name": "Electro Dragon",
+            "level": 2,
+            "maxLevel": 2,
+            "quantity": 2,
+            "housing": 30
+          },
+          {
+            "name": "Balloon",
+            "level": 7,
+            "maxLevel": 7,
+            "quantity": 10,
+            "housing": 5
+          },
+          {
+            "name": "Dragon",
+            "level": 6,
+            "maxLevel": 6,
+            "quantity": 4,
+            "housing": 20
+          }
+        ],
+        "spells": [
+          {
+            "name": "Rage Spell",
+            "level": 5,
+            "maxLevel": 5,
+            "quantity": 2,
+            "housing": 2
+          },
+          {
+            "name": "Freeze Spell",
+            "level": 5,
+            "maxLevel": 5,
+            "quantity": 3,
+            "housing": 1
+          }
+        ],
+        "heroes": [
+          {
+            "name": "Barbarian King",
+            "level": 40,
+            "levels": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50],
+            "upgrading": false
+          },
+          {
+            "name": "Archer Queen",
+            "level": 40,
+            "levels": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50],
+            "upgrading": false
+          },
+          {
+            "name": "Grand Warden",
+            "level": 15,
+            "levels": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+            "upgrading": false
+          }
+        ],
+        "siegeMachine": "Battle Blimp"
+      },
+      "fallback": {
+        "townHall": 11,
+        "troops": [
+          {
+            "name": "Dragon",
+            "level": 6,
+            "maxLevel": 6,
+            "quantity": 10,
+            "housing": 20
+          },
+          {
+            "name": "Balloon",
+            "level": 7,
+            "maxLevel": 7,
+            "quantity": 8,
+            "housing": 5
+          }
+        ],
+        "spells": [
+          {
+            "name": "Rage Spell",
+            "level": 5,
+            "maxLevel": 5,
+            "quantity": 2,
+            "housing": 2
+          },
+          {
+            "name": "Freeze Spell",
+            "level": 5,
+            "maxLevel": 5,
+            "quantity": 1,
+            "housing": 1
+          }
+        ],
+        "heroes": [],
+        "siegeMachine": ""
+      }
+    },
+    "presetLoadouts": {
+      "Queen Charge Hybrid": {
+        "townHall": 13,
+        "troops": [
+          {
+            "name": "Miner",
+            "level": 7,
+            "maxLevel": 7,
+            "quantity": 15,
+            "housing": 6
+          },
+          {
+            "name": "Hog Rider",
+            "level": 9,
+            "maxLevel": 9,
+            "quantity": 10,
+            "housing": 5
+          },
+          {
+            "name": "Wizard",
+            "level": 9,
+            "maxLevel": 9,
+            "quantity": 6,
+            "housing": 4
+          },
+          {
+            "name": "Healer",
+            "level": 6,
+            "maxLevel": 6,
+            "quantity": 5,
+            "housing": 14
+          },
+          {
+            "name": "Wall Breaker",
+            "level": 9,
+            "maxLevel": 9,
+            "quantity": 4,
+            "housing": 2
+          }
+        ],
+        "spells": [
+          {
+            "name": "Rage Spell",
+            "level": 6,
+            "maxLevel": 6,
+            "quantity": 3,
+            "housing": 2
+          },
+          {
+            "name": "Heal Spell",
+            "level": 7,
+            "maxLevel": 7,
+            "quantity": 2,
+            "housing": 2
+          },
+          {
+            "name": "Poison Spell",
+            "level": 6,
+            "maxLevel": 6,
+            "quantity": 1,
+            "housing": 1
+          },
+          {
+            "name": "Freeze Spell",
+            "level": 7,
+            "maxLevel": 7,
+            "quantity": 1,
+            "housing": 1
+          }
+        ],
+        "heroes": [
+          {
+            "name": "Barbarian King",
+            "level": 65,
+            "levels": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65],
+            "upgrading": false
+          },
+          {
+            "name": "Archer Queen",
+            "level": 65,
+            "levels": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65],
+            "upgrading": false
+          },
+          {
+            "name": "Grand Warden",
+            "level": 40,
+            "levels": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40],
+            "upgrading": false
+          },
+          {
+            "name": "Royal Champion",
+            "level": 20,
+            "levels": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+            "upgrading": false
+          }
+        ],
+        "siegeMachine": "Wall Wrecker"
+      },
+      "Mass EDrags": {
+        "townHall": 12,
+        "troops": [
+          {
+            "name": "Electro Dragon",
+            "level": 3,
+            "maxLevel": 3,
+            "quantity": 8,
+            "housing": 30
+          },
+          {
+            "name": "Balloon",
+            "level": 8,
+            "maxLevel": 8,
+            "quantity": 8,
+            "housing": 5
+          },
+          {
+            "name": "Baby Dragon",
+            "level": 5,
+            "maxLevel": 5,
+            "quantity": 1,
+            "housing": 10
+          }
+        ],
+        "spells": [
+          {
+            "name": "Rage Spell",
+            "level": 5,
+            "maxLevel": 5,
+            "quantity": 3,
+            "housing": 2
+          },
+          {
+            "name": "Freeze Spell",
+            "level": 6,
+            "maxLevel": 6,
+            "quantity": 5,
+            "housing": 1
+          }
+        ],
+        "heroes": [
+          {
+            "name": "Barbarian King",
+            "level": 50,
+            "levels": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50],
+            "upgrading": false
+          },
+          {
+            "name": "Archer Queen",
+            "level": 50,
+            "maxLevel": 50,
+            "levels": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50],
+            "upgrading": false
+          },
+          {
+            "name": "Grand Warden",
+            "level": 20,
+            "maxLevel": 20,
+            "levels": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+            "upgrading": false
+          }
+        ],
+        "siegeMachine": "Stone Slammer"
+      },
+      "GoWiBo": {
+        "townHall": 11,
+        "troops": [
+          {
+            "name": "Golem",
+            "level": 7,
+            "maxLevel": 7,
+            "quantity": 3,
+            "housing": 30
+          },
+          {
+            "name": "Witch",
+            "level": 4,
+            "maxLevel": 4,
+            "quantity": 10,
+            "housing": 12
+          },
+          {
+            "name": "Bowler",
+            "level": 3,
+            "maxLevel": 3,
+            "quantity": 10,
+            "housing": 6
+          },
+          {
+            "name": "Wizard",
+            "level": 8,
+            "maxLevel": 8,
+            "quantity": 4,
+            "housing": 4
+          },
+          {
+            "name": "Wall Breaker",
+            "level": 7,
+            "maxLevel": 7,
+            "quantity": 4,
+            "housing": 2
+          }
+        ],
+        "spells": [
+          {
+            "name": "Rage Spell",
+            "level": 5,
+            "maxLevel": 5,
+            "quantity": 2,
+            "housing": 2
+          },
+          {
+            "name": "Jump Spell",
+            "level": 3,
+            "maxLevel": 3,
+            "quantity": 2,
+            "housing": 2
+          },
+          {
+            "name": "Freeze Spell",
+            "level": 5,
+            "maxLevel": 5,
+            "quantity": 1,
+            "housing": 1
+          },
+          {
+            "name": "Poison Spell",
+            "level": 4,
+            "maxLevel": 4,
+            "quantity": 1,
+            "housing": 1
+          }
+        ],
+        "heroes": [
+          {
+            "name": "Barbarian King",
+            "level": 40,
+            "levels": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50],
+            "upgrading": false
+          },
+          {
+            "name": "Archer Queen",
+            "level": 40,
+            "levels": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50],
+            "upgrading": false
+          },
+          {
+            "name": "Grand Warden",
+            "level": 15,
+            "levels": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+            "upgrading": false
+          }
+        ],
+        "siegeMachine": "Wall Wrecker"
+      }
+    },
+    "troopCategories": {
+      "Elixir Troops": [
+        "Barbarian",
+        "Archer",
+        "Giant",
+        "Goblin",
+        "Wall Breaker",
+        "Balloon",
+        "Wizard",
+        "Healer",
+        "Dragon",
+        "P.E.K.K.A",
+        "Baby Dragon",
+        "Miner",
+        "Electro Dragon",
+        "Yeti",
+        "Dragon Rider",
+        "Electro Titan",
+        "Root Rider"
+      ],
+      "Dark Troops": [
+        "Minion",
+        "Hog Rider",
+        "Valkyrie",
+        "Golem",
+        "Witch",
+        "Lava Hound",
+        "Bowler",
+        "Ice Golem",
+        "Headhunter",
+        "Battle Ram",
+        "Mountain Golem"
+      ],
+      "Super Troops": [
+        "Super Barbarian",
+        "Super Archer",
+        "Super Giant",
+        "Sneaky Goblin",
+        "Super Wall Breaker",
+        "Rocket Balloon",
+        "Super Wizard",
+        "Super Dragon",
+        "Inferno Dragon",
+        "Super Minion",
+        "Super Valkyrie",
+        "Super Witch",
+        "Ice Hound",
+        "Super Bowler"
+      ]
+    },
+    "spellCategories": {
+      "Elixir Spells": [
+        "Lightning Spell",
+        "Healing Spell",
+        "Rage Spell",
+        "Jump Spell",
+        "Freeze Spell",
+        "Clone Spell",
+        "Invisibility Spell",
+        "Recall Spell",
+        "Overpowering Spell"
+      ],
+      "Dark Spells": [
+        "Poison Spell",
+        "Earthquake Spell",
+        "Haste Spell",
+        "Skeleton Spell",
+        "Bat Spell"
+      ]
+    },
+    "troopFilters": [
+      {"name": "Air", "troops": ["Balloon", "Dragon", "Baby Dragon", "Electro Dragon", "Dragon Rider", "Electro Titan", "Minion", "Lava Hound"]},
+      {"name": "Ground", "troops": ["Barbarian", "Archer", "Giant", "Goblin", "Wall Breaker", "Wizard", "P.E.K.K.A", "Miner", "Yeti", "Root Rider", "Hog Rider", "Valkyrie", "Golem", "Witch", "Bowler", "Ice Golem", "Headhunter", "Mountain Golem"]},
+      {"name": "Tank", "troops": ["Giant", "P.E.K.K.A", "Golem", "Ice Golem", "Yeti", "Lava Hound", "Mountain Golem"]},
+      {"name": "Ranged", "troops": ["Archer", "Wizard", "Baby Dragon", "Electro Dragon", "Dragon Rider", "Electro Titan", "Minion", "Witch", "Bowler"]},
+      {"name": "Support", "troops": ["Healer", "Ice Golem", "Witch", "Headhunter"]}
+    ]
+  }

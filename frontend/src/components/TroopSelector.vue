@@ -1,0 +1,207 @@
+<template>
+  <div class="troop-row">
+    <span class="troop-name">{{ troop.name }}</span>
+
+    <div class="troop-controls">
+      <div class="level-selector">
+        <label :for="`${uniqueId}-level`" class="control-label">Level</label>
+        <select
+          :id="`${uniqueId}-level`"
+          v-model="troopLevel"
+          @change="updateTroop"
+        >
+          <option
+            v-for="level in availableLevels"
+            :key="level"
+            :value="level"
+            :disabled="level > troop.maxLevel"
+          >
+            {{ level }}
+          </option>
+        </select>
+      </div>
+
+      <div class="quantity-selector">
+        <label :for="`${uniqueId}-quantity`" class="control-label">Qty</label>
+        <input
+          :id="`${uniqueId}-quantity`"
+          type="number"
+          min="0"
+          :max="maxQuantity"
+          v-model.number="troopQuantity"
+          @blur="updateTroop"
+          @keyup.enter="updateTroop"
+        />
+      </div>
+
+      <slot name="actions"></slot>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent, PropType, ref, computed, watch } from "vue";
+import { Troop } from "../types";
+
+export default defineComponent({
+  name: "TroopSelector",
+  props: {
+    troop: {
+      type: Object as PropType<Troop>,
+      required: true,
+    },
+    townHallLevel: {
+      type: Number as PropType<number | null>,
+      required: true,
+    },
+    maxQuantity: {
+      type: Number,
+      default: 50,
+    },
+  },
+  emits: ["update:troop"],
+  setup(props, { emit }) {
+    // Local state
+    const troopLevel = ref(props.troop.level);
+    const troopQuantity = ref(props.troop.quantity);
+
+    // Generate unique ID for form elements
+    const uniqueId = computed(() => {
+      return `troop-${props.troop.name.toLowerCase().replace(/\s+/g, "-")}`;
+    });
+
+    // Available levels
+    const availableLevels = computed(() => {
+      const maxLevel = props.troop.maxLevel || 13; // Use a reasonable default max level
+      return Array.from({ length: maxLevel }, (_, i) => i + 1);
+    });
+
+    // Watch for prop changes
+    watch(
+      () => props.troop,
+      (newTroop) => {
+        troopLevel.value = newTroop.level;
+        troopQuantity.value = newTroop.quantity;
+      },
+      { deep: true }
+    );
+
+    // Watch for town hall level changes
+    watch(
+      () => props.townHallLevel,
+      () => {
+        // If current level is greater than max level, reset to max level
+        if (troopLevel.value > props.troop.maxLevel) {
+          troopLevel.value = props.troop.maxLevel;
+          updateTroop();
+        }
+      }
+    );
+
+    // Update troop
+    const updateTroop = () => {
+      // Ensure valid quantity
+      if (troopQuantity.value < 0) {
+        troopQuantity.value = 0;
+      }
+
+      if (troopQuantity.value > props.maxQuantity) {
+        troopQuantity.value = props.maxQuantity;
+      }
+
+      // Ensure valid level
+      if (troopLevel.value > props.troop.maxLevel) {
+        troopLevel.value = props.troop.maxLevel;
+      }
+
+      // Update troop
+      emit("update:troop", {
+        ...props.troop,
+        level: troopLevel.value,
+        quantity: troopQuantity.value,
+      });
+    };
+
+    return {
+      uniqueId,
+      troopLevel,
+      troopQuantity,
+      availableLevels,
+      updateTroop,
+    };
+  },
+});
+</script>
+
+<style scoped>
+.troop-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 12px 0;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 10px 12px;
+  transition: background-color 0.2s;
+}
+
+.troop-row:hover {
+  background: #edf2f7;
+}
+
+.troop-name {
+  flex: 1;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.troop-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.level-selector,
+.quantity-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.control-label {
+  font-size: 0.7rem;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+select,
+input {
+  width: 70px;
+  padding: 8px;
+  font-size: 0.9rem;
+  border: 1px solid #d1d9e6;
+  border-radius: 6px;
+  background-color: white;
+}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 14px;
+  padding-right: 30px;
+}
+
+input {
+  text-align: center;
+}
+
+input:focus,
+select:focus {
+  border-color: #3b5b6d;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 91, 109, 0.2);
+}
+</style>
