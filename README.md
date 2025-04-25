@@ -137,6 +137,3 @@ The system supports two LLM providers:
    - Configure `OLLAMA_BASE_URL` and model names
    - Requires Ollama to be running locally
 
-## License
-
-This project is for educational purposes only. Clash of Clans is owned by Supercell.
