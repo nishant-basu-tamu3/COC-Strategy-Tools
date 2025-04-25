@@ -92,8 +92,11 @@ The server will run on http://localhost:3000 by default.
    ```
    npm install
    ```
-
-3. Start the development server:
+3. Fix Lint:
+   ```
+   npm run lint -- --fix
+   ```
+4. Start the development server:
    ```
    npm run serve
    ```
