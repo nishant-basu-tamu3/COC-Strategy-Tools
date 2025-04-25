@@ -64,7 +64,7 @@ GitHub: https://github.com/nishant-basu-tamu3/COC-Strategy-Tools.git
 3. Configure environment variables:
    - Set your LLM provider and API keys in the .env file
 
-4. Run data collection (optional, data is included):
+4. Run data collection:
    ```
    npm run scrape
    ```
