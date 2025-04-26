@@ -1,7 +1,5 @@
-// src/strategy-simulator/modified-example.js
 const { simulateBattle } = require('./simulator');
 
-// Example army composition in new frontend format
 const exampleFrontendPayload = {
   army: {
     townHall: 9,
@@ -37,11 +35,9 @@ const exampleFrontendPayload = {
   }
 };
 
-// Convert frontend payload to the format expected by the simulator
 function convertPayloadToSimulatorFormat(payload) {
   const { army, target } = payload;
   
-  // Format army
   const formattedArmy = {
     townHall: army.townHall,
     troops: {},
@@ -50,55 +46,46 @@ function convertPayloadToSimulatorFormat(payload) {
     siegeMachine: army.siegeMachine
   };
   
-  // Format troops
   army.troops.forEach(troop => {
     if (troop.quantity > 0) {
       formattedArmy.troops[troop.name] = troop.quantity;
     }
   });
   
-  // Format spells
   army.spells.forEach(spell => {
     if (spell.quantity > 0) {
       formattedArmy.spells[spell.name] = spell.quantity;
     }
   });
   
-  // Format heroes
   army.heroes.forEach(hero => {
     if (!hero.upgrading) {
       formattedArmy.heroes[hero.name] = hero.level;
     }
   });
   
-  // Format base layout
   const formattedBase = {
     townHallLevel: target.townHall,
     layout: target.baseLayout || "Unknown layout",
     defenses: {},
     walls: {
-      level: target.townHall, // Estimating wall level based on TH level
-      quantity: 250 // Default quantity, can be adjusted
+      level: target.townHall,
+      quantity: 250
     }
   };
   
-  // Handle defense levels based on toggleOptions
   const maxDefenses = target.toggleOptions?.find(option => 
     option.label === "Max defense levels"
   )?.enabled || false;
   
-  // Include traps based on toggleOptions
   const includeTraps = target.toggleOptions?.find(option => 
     option.label === "Enable traps"
   )?.enabled || false;
   
-  // Include clan castle troops based on toggleOptions
   const includeClanCastle = target.toggleOptions?.find(option => 
     option.label === "Enable Clan Castle troops"
   )?.enabled || false;
   
-  // Set up default defenses based on Town Hall level
-  // These values are approximations and can be adjusted
   if (target.townHall >= 9) {
     formattedBase.defenses = {
       "Cannon": maxDefenses ? 4 : 3,
@@ -177,7 +164,6 @@ function convertPayloadToSimulatorFormat(payload) {
     }
   }
   
-  // Add heroes to the base if present
   if (target.heroes && target.heroes.length > 0) {
     formattedBase.heroes = {};
     target.heroes.forEach(hero => {
@@ -201,22 +187,17 @@ async function runExample() {
   try {
     console.log("Starting example simulation with new frontend payload format...");
     
-    // Convert the payload
     const { formattedArmy, formattedBase } = convertPayloadToSimulatorFormat(exampleFrontendPayload);
     
     console.log("Converted Army:", JSON.stringify(formattedArmy, null, 2));
     console.log("Converted Base:", JSON.stringify(formattedBase, null, 2));
     
-    // Run the simulation
     const results = await simulateBattle(formattedArmy, formattedBase);
     
-    // Print the simulation results
     console.log("\n=== SIMULATION RESULTS ===\n");
     
-    // Print the outcome
     console.log(`Outcome: ${results.outcome.stars} stars, ${results.outcome.destructionPercentage}% destruction\n`);
     
-    // Print each section
     if (results.sections.summary) {
       console.log("Battle Summary:");
       console.log(results.sections.summary);
@@ -247,7 +228,6 @@ async function runExample() {
       console.log();
     }
 
-    // If no sections were extracted, print the raw response
     if (Object.values(results.sections).every(section => !section)) {
       console.log("Raw LLM Response:");
       console.log(results.rawResponse);

@@ -1,4 +1,3 @@
-// src/data-processing/process-data.js
 const fs = require('fs-extra');
 const path = require('path');
 const axios = require('axios');
@@ -6,10 +5,8 @@ const { Document } = require('langchain/document');
 const { Chroma } = require('langchain/vectorstores/chroma');
 const dotenv = require('dotenv');
 
-// Load environment variables
 dotenv.config();
 
-// Configuration
 const CONFIG = {
   dataDir: path.join(__dirname, '../../data'),
   rawDir: path.join(__dirname, '../../data/raw'),
@@ -31,8 +28,6 @@ class OllamaEmbeddings {
 
   /**
    * Get embeddings for a single text
-   * @param {string} text - Text to embed
-   * @returns {Promise<number[]>} - Embedding vector
    */
   async embedQuery(text) {
     try {
@@ -50,18 +45,14 @@ class OllamaEmbeddings {
 
   /**
    * Get embeddings for multiple texts
-   * @param {string[]} texts - Array of texts to embed
-   * @returns {Promise<number[][]>} - Array of embedding vectors
    */
   async embedDocuments(texts) {
     const embeddings = [];
     
-    // Process in batches to avoid overwhelming the API
     for (let i = 0; i < texts.length; i += this.batchSize) {
       const batch = texts.slice(i, i + this.batchSize);
       console.log(`Processing embedding batch ${Math.floor(i/this.batchSize) + 1}/${Math.ceil(texts.length/this.batchSize)}...`);
       
-      // Process each text in the batch
       const batchPromises = batch.map(text => this.embedQuery(text));
       const batchResults = await Promise.all(batchPromises);
       embeddings.push(...batchResults);
@@ -73,13 +64,11 @@ class OllamaEmbeddings {
 
 /**
  * Combine all data into a single dataset
- * @returns {Promise<Object>} Combined data
  */
 async function combineData() {
   try {
     console.log('Combining data from all sources...');
     
-    // Read all files from the data directory
     const categories = ['troops', 'defenses', 'spells', 'heroes'];
     let allData = [];
     
@@ -105,31 +94,24 @@ async function combineData() {
 
 /**
  * Clean and enhance the data
- * @param {Array} data - Combined raw data
- * @returns {Array} - Cleaned and enhanced data
  */
 function cleanAndEnhanceData(data) {
   console.log('Cleaning and enhancing data...');
   
   return data.map(item => {
-    // Create a copy to avoid modifying the original
     const cleanedItem = { ...item };
     
-    // Fill in missing descriptions if possible
     if (!cleanedItem.description || cleanedItem.description.trim() === '') {
       cleanedItem.description = generateDescription(cleanedItem);
     }
     
-    // Clean up and format stat values
     if (cleanedItem.stats_by_level && Array.isArray(cleanedItem.stats_by_level)) {
       cleanedItem.stats_by_level = cleanedItem.stats_by_level.map(level => {
         const cleanedLevel = { ...level };
         
-        // Convert string numbers to actual numbers
         Object.keys(cleanedLevel).forEach(key => {
           const value = cleanedLevel[key];
           if (typeof value === 'string' && value.match(/^[\d,]+$/)) {
-            // Remove commas and convert to number
             cleanedLevel[key] = parseInt(value.replace(/,/g, ''), 10);
           }
         });
@@ -144,8 +126,6 @@ function cleanAndEnhanceData(data) {
 
 /**
  * Generate a basic description for items missing one
- * @param {Object} item - Data item
- * @returns {string} - Generated description
  */
 function generateDescription(item) {
   if (item.type === 'troop') {
@@ -163,8 +143,6 @@ function generateDescription(item) {
 
 /**
  * Create text documents from the data items for embedding
- * @param {Array} data - Cleaned data items
- * @returns {Array<Document>} - Array of Document objects for embedding
  */
 function createDocuments(data) {
   console.log('Creating text documents for embedding...');
@@ -172,7 +150,6 @@ function createDocuments(data) {
   const documents = [];
   
   for (const item of data) {
-    // Basic info document
     const basicInfo = new Document({
       pageContent: `
         Name: ${item.name}
@@ -189,15 +166,12 @@ function createDocuments(data) {
     });
     documents.push(basicInfo);
     
-    // Stats document - includes detailed stats
     if (item.stats_by_level && item.stats_by_level.length > 0) {
-      // Create a formatted string with the stats
       let statsContent = `${item.name} Stats by Level:\n`;
       
       item.stats_by_level.forEach(levelStats => {
         statsContent += `Level ${levelStats.level || '?'}:\n`;
         
-        // Add all available stats
         Object.entries(levelStats).forEach(([key, value]) => {
           if (key !== 'level') {
             statsContent += `  ${key.replace(/_/g, ' ')}: ${value}\n`;
@@ -218,7 +192,6 @@ function createDocuments(data) {
       documents.push(statsDoc);
     }
     
-    // Special abilities document
     if (item.special_abilities && item.special_abilities.length > 0) {
       const abilitiesContent = `
         ${item.name} Special Abilities:
@@ -238,7 +211,6 @@ function createDocuments(data) {
       documents.push(abilitiesDoc);
     }
     
-    // Troop-specific document
     if (item.type === 'troop') {
       const troopContent = `
         Troop: ${item.name}
@@ -265,7 +237,6 @@ function createDocuments(data) {
       documents.push(troopDoc);
     }
     
-    // Defense-specific document
     if (item.type === 'defense') {
       const defenseContent = `
         Defense: ${item.name}
@@ -290,7 +261,6 @@ function createDocuments(data) {
       documents.push(defenseDoc);
     }
     
-    // Spell-specific document
     if (item.type === 'spell') {
       const spellContent = `
         Spell: ${item.name}
@@ -315,7 +285,6 @@ function createDocuments(data) {
       documents.push(spellDoc);
     }
     
-    // Hero-specific document
     if (item.type === 'hero') {
       const heroContent = `
         Hero: ${item.name}
@@ -347,19 +316,15 @@ function createDocuments(data) {
 
 /**
  * Save embeddings to a file (as a backup)
- * @param {Array<Document>} documents - Documents 
- * @param {Array<Array<number>>} embeddings - Embeddings 
  */
 async function saveEmbeddingsToFile(documents, embeddings) {
   try {
-    // Create an array of objects with document content and embeddings
     const embeddingData = documents.map((doc, index) => ({
       content: doc.pageContent,
       metadata: doc.metadata,
       embedding: embeddings[index]
     }));
     
-    // Save to file
     const embeddingsPath = path.join(CONFIG.processedDir, 'embeddings.json');
     await fs.writeJson(embeddingsPath, embeddingData, { spaces: 2 });
     console.log(`Saved embeddings to ${embeddingsPath}`);
@@ -370,20 +335,15 @@ async function saveEmbeddingsToFile(documents, embeddings) {
 
 /**
  * Generate embeddings for documents
- * @param {Array<Document>} documents - Documents to embed
- * @returns {Promise<Array<Array<number>>>} - Embeddings
  */
 async function generateDocumentEmbeddings(documents) {
   try {
     console.log('Generating embeddings with Ollama...');
     
-    // Initialize Ollama embeddings
     const embeddings = new OllamaEmbeddings();
     
-    // Get document contents
     const texts = documents.map(doc => doc.pageContent);
     
-    // Generate embeddings
     return await embeddings.embedDocuments(texts);
   } catch (error) {
     console.error(`Error generating embeddings: ${error.message}`);
@@ -393,20 +353,15 @@ async function generateDocumentEmbeddings(documents) {
 
 /**
  * Save processed data to JSON
- * @param {Array} data - Processed data
- * @returns {Promise<void>}
  */
 async function saveProcessedData(data) {
   try {
-    // Ensure processed directory exists
     await fs.ensureDir(CONFIG.processedDir);
     
-    // Save all data to one file
     const allDataPath = path.join(CONFIG.processedDir, 'all_data.json');
     await fs.writeJson(allDataPath, data, { spaces: 2 });
     console.log(`Saved all processed data to ${allDataPath}`);
     
-    // Also save by category
     const byType = {
       troops: data.filter(item => item.type === 'troop'),
       defenses: data.filter(item => item.type === 'defense'),
@@ -427,26 +382,19 @@ async function saveProcessedData(data) {
 
 /**
  * Store documents with embeddings using Chroma local file-based storage
- * @param {Array<Document>} documents - Documents to store
- * @param {Array<Array<number>>} embeddings - Document embeddings
  */
 async function storeDocumentsWithEmbeddings(documents, embeddings) {
   try {
     console.log('Storing documents with embeddings in local Chroma...');
     
-    // Ensure directory exists
     await fs.ensureDir(CONFIG.chromaDir);
     
-    // Create unique IDs for each document
     const ids = documents.map((_, i) => `doc_${i}`);
     
-    // Create metadata array
     const metadatas = documents.map(doc => doc.metadata);
     
-    // Create content array
     const contents = documents.map(doc => doc.pageContent);
     
-    // Save as JSON (basic format for now)
     const chromaData = {
       ids,
       embeddings,
@@ -471,35 +419,26 @@ async function main() {
   try {
     console.log('Starting data processing...');
     
-    // Ensure directories exist
     await fs.ensureDir(CONFIG.processedDir);
     await fs.ensureDir(CONFIG.chromaDir);
     
-    // Combine all data
     const rawData = await combineData();
     if (rawData.length === 0) {
       throw new Error('No data found to process. Run the scraper first.');
     }
     
-    // Clean and enhance data
     const processedData = cleanAndEnhanceData(rawData);
     
-    // Save processed data
     await saveProcessedData(processedData);
     
-    // Create documents for embedding
     const documents = createDocuments(processedData);
     
-    // Generate embeddings
     console.log('Generating embeddings (this may take a while)...');
     try {
-      // Generate document embeddings
       const documentEmbeddings = await generateDocumentEmbeddings(documents);
       
-      // Save embeddings to file as backup
       await saveEmbeddingsToFile(documents, documentEmbeddings);
       
-      // Store documents with embeddings using local file storage
       await storeDocumentsWithEmbeddings(documents, documentEmbeddings);
       
       console.log('Data processing and embedding complete!');
@@ -513,7 +452,6 @@ async function main() {
   }
 }
 
-// Run the processor if this script is executed directly
 if (require.main === module) {
   main();
 }
