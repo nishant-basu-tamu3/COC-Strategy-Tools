@@ -9,6 +9,15 @@ A comprehensive strategy tool for Clash of Clans using RAG (Retrieval Augmented 
 - **RAG System**: Uses retrieval augmented generation to provide contextually relevant advice
 - **Responsive UI**: Modern Vue.js interface for easy strategy planning
 
+
+## Project By
+
+1) Nishant Basu (nishant.basu3@tamu.edu)
+2) Jvk Chaitanya (jvk_chaitanya@tamu.edu)
+3) Ankita Girish Aswathanarayana (ankita.girish@tamu.edu)
+4) Prajnadipta Kundu (prajnadipta@tamu.edu)
+
+
 ## Project Structure
 
 ```
