@@ -5,23 +5,20 @@ const path = require('path');
 
 // Configuration
 const CONFIG = {
-  // Sitemap URL for CoC Wiki
   sitemapUrl: 'https://clashofclans.fandom.com/sitemap-newsitemapxml-NS_0-id-2063-408103.xml',
   
-  // Output paths
+  // Output directories
   outputDir: path.join(__dirname, '../../data'),
   rawDir: path.join(__dirname, '../../data/raw'),
   
-  // Request delay to be nice to the server (ms)
   requestDelay: 1000,
   
-  // Batch size for processing URLs
+  // Batch size to process URLs
   batchSize: 5
 };
 
 /**
  * Fetch and parse the sitemap to extract URLs
- * @returns {Promise<Object>} - Categorized URLs
  */
 async function parseSitemap() {
   try {
@@ -33,7 +30,6 @@ async function parseSitemap() {
     
     const urls = [];
     
-    // Extract URLs from the sitemap
     $('url').each((i, element) => {
       const loc = $(element).find('loc').text();
       const lastmod = $(element).find('lastmod').text();
@@ -60,8 +56,6 @@ async function parseSitemap() {
 
 /**
  * Categorize URLs into different types (troops, defenses, etc.)
- * @param {Array} urls - List of URL objects
- * @returns {Object} - Object with categorized URLs
  */
 function categorizeUrls(urls) {
   const result = {
@@ -156,8 +150,6 @@ function categorizeUrls(urls) {
 
 /**
  * Fetch HTML content from a URL
- * @param {string} url - The URL to fetch
- * @returns {Promise<string>} - The HTML content
  */
 async function fetchPage(url) {
   try {
@@ -172,8 +164,6 @@ async function fetchPage(url) {
 
 /**
  * Clean text by removing extra whitespace and special characters
- * @param {string} text - Text to clean
- * @returns {string} - Cleaned text
  */
 function cleanText(text) {
   if (!text) return '';
@@ -182,8 +172,6 @@ function cleanText(text) {
 
 /**
  * Extract image URL from the page
- * @param {CheerioStatic} $ - Loaded Cheerio object
- * @returns {string|null} - Image URL or null if not found
  */
 function extractImageUrl($) {
   // Try to get the main image from the infobox
@@ -203,13 +191,10 @@ function extractImageUrl($) {
 
 /**
  * Extract special abilities or notes from the page
- * @param {CheerioStatic} $ - Loaded Cheerio object
- * @returns {string[]} - List of special abilities or notes
  */
 function extractSpecialAbilities($) {
   const abilities = [];
   
-  // Look for sections like "Special Ability", "Abilities", or "Skill"
   const headings = $('h2, h3, h4');
   
   headings.each((i, heading) => {
@@ -225,7 +210,7 @@ function extractSpecialAbilities($) {
       while (element.length > 0 && !element.is('h2, h3, h4')) {
         if (element.is('p')) {
           const text = cleanText(element.text());
-          if (text.length > 10) { // Ignore very short paragraphs
+          if (text.length > 10) {
             abilities.push(text);
           }
         }
@@ -239,17 +224,14 @@ function extractSpecialAbilities($) {
 
 /**
  * Extract description from the page
- * @param {CheerioStatic} $ - Loaded Cheerio object
- * @returns {string} - Description text
  */
 function extractDescription($) {
-  // Usually the first few paragraphs contain the description
   let description = '';
   const paragraphs = $('.mw-parser-output > p');
   
   for (let i = 0; i < Math.min(3, paragraphs.length); i++) {
     const text = cleanText($(paragraphs[i]).text());
-    if (text.length > 30) { // Skip very short paragraphs
+    if (text.length > 30) {
       description += text + ' ';
     }
   }
@@ -259,14 +241,10 @@ function extractDescription($) {
 
 /**
  * Extract basic information from a troop page
- * @param {CheerioStatic} $ - Loaded Cheerio object
- * @param {string} url - URL of the page
- * @returns {Object} - Extracted troop data
  */
 function extractTroopData($, url) {
-  // Get the troop name from the page title
   const name = $('h1.page-header__title').text().trim();
-  // Create safe ID - replace slashes with underscores to avoid directory issues
+  // Create safe ID
   const id = name.toLowerCase().replace(/\s+/g, '_').replace(/\//g, '_');
   
   // Initialize troop data object
@@ -289,7 +267,6 @@ function extractTroopData($, url) {
     stats_by_level: []
   };
   
-  // Extract info from the infobox (right sidebar)
   const infobox = $('.portable-infobox');
   
   infobox.find('.pi-item').each((i, element) => {
@@ -315,31 +292,28 @@ function extractTroopData($, url) {
     }
   });
   
-  // Extract stats by level from tables
   const statsTables = $('table.wikitable');
   
   statsTables.each((i, table) => {
     const headers = [];
     const levelData = [];
     
-    // Extract table headers
     $(table).find('th').each((j, header) => {
       headers.push($(header).text().trim().toLowerCase()
         .replace(/\s+/g, '_')
         .replace(/[^a-z0-9_]/g, ''));
     });
     
-    // Check if this table contains level data (should have level, hp, dps, etc.)
     if (headers.includes('level') || headers.includes('hitpoints') || headers.includes('damage') || headers.includes('dps')) {
-      // Extract table rows
+
       $(table).find('tr').each((j, row) => {
-        if (j === 0) return; // Skip header row
+        if (j === 0) return;
         
         const rowData = {};
         $(row).find('td').each((k, cell) => {
           if (headers[k]) {
             const value = $(cell).text().trim();
-            // Try to convert to number if possible
+
             rowData[headers[k]] = !isNaN(value) && value !== '' ? parseFloat(value) : value;
           }
         });
@@ -349,7 +323,6 @@ function extractTroopData($, url) {
         }
       });
       
-      // If we found data, add it to the troop's stats
       if (levelData.length > 0) {
         troopData.stats_by_level = levelData;
       }
@@ -361,20 +334,14 @@ function extractTroopData($, url) {
 
 /**
  * Extract basic information from a defense page
- * @param {CheerioStatic} $ - Loaded Cheerio object
- * @param {string} url - URL of the page
- * @returns {Object} - Extracted defense data
  */
 function extractDefenseData($, url) {
-  // Get the defense name from the page title
   let name = $('h1.page-header__title').text().trim();
-  // Remove "/Home Village" if present
+
   name = name.replace(/\/Home Village$/, '');
   
-  // Create safe ID - replace slashes with underscores to avoid directory issues
   const id = name.toLowerCase().replace(/\s+/g, '_').replace(/\//g, '_');
   
-  // Initialize defense data object
   const defenseData = {
     id,
     name,
@@ -392,7 +359,6 @@ function extractDefenseData($, url) {
     stats_by_level: []
   };
   
-  // Extract info from the infobox (right sidebar)
   const infobox = $('.portable-infobox');
   
   infobox.find('.pi-item').each((i, element) => {
@@ -414,21 +380,18 @@ function extractDefenseData($, url) {
     }
   });
   
-  // Extract stats by level from tables
   const statsTables = $('table.wikitable');
   
   statsTables.each((i, table) => {
     const headers = [];
     const levelData = [];
     
-    // Extract table headers
     $(table).find('th').each((j, header) => {
       headers.push($(header).text().trim().toLowerCase()
         .replace(/\s+/g, '_')
         .replace(/[^a-z0-9_]/g, ''));
     });
     
-    // Check if this table contains level data
     if (headers.includes('level') || headers.includes('hitpoints') || headers.includes('damage') || headers.includes('dps')) {
       // Extract table rows
       $(table).find('tr').each((j, row) => {
@@ -460,17 +423,12 @@ function extractDefenseData($, url) {
 
 /**
  * Extract basic information from a spell page
- * @param {CheerioStatic} $ - Loaded Cheerio object
- * @param {string} url - URL of the page
- * @returns {Object} - Extracted spell data
  */
 function extractSpellData($, url) {
-  // Get the spell name from the page title
   let name = $('h1.page-header__title').text().trim();
-  // Remove "/Home Village" if present
+
   name = name.replace(/\/Home Village$/, '');
   
-  // Create safe ID - replace slashes with underscores to avoid directory issues
   const id = name.toLowerCase().replace(/\s+/g, '_').replace(/\//g, '_');
   
   // Initialize spell data object
@@ -491,7 +449,6 @@ function extractSpellData($, url) {
     stats_by_level: []
   };
   
-  // Extract info from the infobox (right sidebar)
   const infobox = $('.portable-infobox');
   
   infobox.find('.pi-item').each((i, element) => {
@@ -513,31 +470,26 @@ function extractSpellData($, url) {
     }
   });
   
-  // Extract stats by level from tables
   const statsTables = $('table.wikitable');
   
   statsTables.each((i, table) => {
     const headers = [];
     const levelData = [];
     
-    // Extract table headers
     $(table).find('th').each((j, header) => {
       headers.push($(header).text().trim().toLowerCase()
         .replace(/\s+/g, '_')
         .replace(/[^a-z0-9_]/g, ''));
     });
     
-    // Check if this table contains level data
     if (headers.includes('level') || headers.includes('radius') || headers.includes('duration') || headers.includes('damage')) {
-      // Extract table rows
       $(table).find('tr').each((j, row) => {
-        if (j === 0) return; // Skip header row
+        if (j === 0) return;
         
         const rowData = {};
         $(row).find('td').each((k, cell) => {
           if (headers[k]) {
             const value = $(cell).text().trim();
-            // Try to convert to number if possible
             rowData[headers[k]] = !isNaN(value) && value !== '' ? parseFloat(value) : value;
           }
         });
@@ -547,7 +499,6 @@ function extractSpellData($, url) {
         }
       });
       
-      // If we found data, add it to the spell's stats
       if (levelData.length > 0) {
         spellData.stats_by_level = levelData;
       }
@@ -559,25 +510,18 @@ function extractSpellData($, url) {
 
 /**
  * Extract basic information from a hero page
- * @param {CheerioStatic} $ - Loaded Cheerio object
- * @param {string} url - URL of the page
- * @returns {Object} - Extracted hero data
  */
 function extractHeroData($, url) {
-  // Get the hero name from the page title
   const name = $('h1.page-header__title').text().trim();
   if (!name) return null;
-  
-  // Skip pages that aren't actual hero pages
+
   if (name === "Heroes" || name.includes("Altar") || name.includes("Hall")) {
     console.warn(`Skipping non-hero page: ${url}`);
     return null;
   }
-  
-  // Create safe ID - replace slashes with underscores to avoid directory issues
+
   const id = name.toLowerCase().replace(/\s+/g, '_').replace(/\//g, '_');
-  
-  // Initialize hero data object
+
   const heroData = {
     id,
     name,
@@ -588,15 +532,12 @@ function extractHeroData($, url) {
     special_abilities: extractSpecialAbilities($),
     stats_by_level: []
   };
-  
-  // Extract stats from tables
+
   const statsTables = $('.hero-statistics-table');
-  
-  // If we found stat tables, extract the data
+
   if (statsTables.length > 0) {
-    // Extract basic properties from the first table
     const firstTable = $(statsTables[0]);
-    const firstRow = firstTable.find('tbody tr').eq(1); // Get the first data row
+    const firstRow = firstTable.find('tbody tr').eq(1);
     
     if (firstRow.length > 0) {
       const cells = firstRow.find('td');
@@ -611,14 +552,12 @@ function extractHeroData($, url) {
       }
     }
     
-    // Extract level stats from the second table
     if (statsTables.length > 1) {
       const secondTable = $(statsTables[1]);
       const rows = secondTable.find('tbody tr');
       
-      // Skip the header row
       rows.each((i, row) => {
-        if (i === 0) return; // Skip header row
+        if (i === 0) return;
         
         const cells = $(row).find('td');
         if (cells.length >= 8) {
@@ -638,23 +577,19 @@ function extractHeroData($, url) {
       });
     }
   } else {
-    // Try to extract info from the legacy infobox if stat tables are not present
     const infobox = $('aside.portable-infobox');
     
     if (infobox.length) {
-      // If infobox title exists, use it as the hero name
       const infoboxTitle = infobox.find('h2.pi-title').text().trim();
       if (infoboxTitle) {
         heroData.name = infoboxTitle;
       }
-      
-      // Get image if available
+
       const infoboxImage = infobox.find('figure img').attr('src');
       if (infoboxImage) {
         heroData.image_url = infoboxImage;
       }
       
-      // Extract all properties from infobox
       infobox.find('.pi-data').each((i, el) => {
         const label = $(el).find('.pi-data-label').text().trim();
         const value = $(el).find('.pi-data-value').text().trim();
@@ -665,7 +600,6 @@ function extractHeroData($, url) {
     }
   }
   
-  // Extract hero equipment section if available
   const equipmentSection = $('h2:contains("Hero Equipment")').next('ul');
   if (equipmentSection.length > 0) {
     const equipmentItems = [];
@@ -691,22 +625,19 @@ function extractHeroData($, url) {
         .replace(/[^a-z0-9_]/g, ''));
     });
     
-    // Check if this looks like a stats table
     if (tableHeaders.includes('level') || 
         tableHeaders.includes('hitpoints') || 
         tableHeaders.includes('damage') || 
         tableHeaders.includes('dps')) {
-      
-      // Extract rows
+
       const tableData = [];
       $(table).find('tr').each((j, row) => {
-        if (j === 0) return; // Skip header row
+        if (j === 0) return;
         
         const rowData = {};
         $(row).find('td').each((k, cell) => {
           if (tableHeaders[k]) {
             const value = $(cell).text().trim();
-            // Try to convert to number if possible
             rowData[tableHeaders[k]] = !isNaN(value) && value !== '' ? parseFloat(value) : value;
           }
         });
@@ -716,14 +647,12 @@ function extractHeroData($, url) {
         }
       });
       
-      // If we have data and no existing stats, use this
       if (tableData.length > 0 && heroData.stats_by_level.length === 0) {
         heroData.stats_by_level = tableData;
       }
     }
   });
   
-  // Final validation - we need at least some data
   if (
     (!heroData.stats_by_level || heroData.stats_by_level.length === 0) &&
     (!heroData.special_abilities || heroData.special_abilities.length === 0) &&
@@ -739,9 +668,6 @@ function extractHeroData($, url) {
 
 /**
  * Scrape data from a single URL
- * @param {Object} urlData - URL data object with url and lastModified
- * @param {string} type - Expected type ('troop', 'defense', 'spell', 'hero')
- * @returns {Promise<Object>} - Scraped data
  */
 async function scrapeUrl(urlData, type) {
   const { url, lastModified } = urlData;
@@ -766,19 +692,14 @@ async function scrapeUrl(urlData, type) {
 
 /**
  * Process a batch of URLs
- * @param {Array} urls - URLs to process
- * @param {string} type - Type of URLs ('troop', 'defense', etc.)
- * @returns {Promise<Array>} - Scraped data
  */
 async function processBatch(urls, type) {
   const results = [];
   
-  // Process URLs in sequence to avoid overwhelming the server
   for (const url of urls) {
     const result = await scrapeUrl(url, type);
     if (result) results.push(result);
-    
-    // Add a small delay between requests
+
     await new Promise(resolve => setTimeout(resolve, CONFIG.requestDelay));
   }
   
@@ -787,9 +708,6 @@ async function processBatch(urls, type) {
 
 /**
  * Save data to JSON file
- * @param {Object[]} data - Data to save
- * @param {string} filename - Output filename
- * @returns {Promise<void>}
  */
 async function saveToJson(data, filename) {
   const outputPath = path.join(CONFIG.outputDir, filename);
@@ -798,11 +716,9 @@ async function saveToJson(data, filename) {
   console.log(`Saved data to ${outputPath}`);
   
   try {
-    // Also save individual files for each item
     await fs.ensureDir(CONFIG.rawDir);
     
     for (const item of data) {
-      // Sanitize item id to be Windows-path-friendly (replace slashes with underscores)
       const safeId = item.id.replace(/\//g, '_');
       const itemPath = path.join(CONFIG.rawDir, `${item.type}_${safeId}.json`);
       await fs.writeJson(itemPath, item, { spaces: 2 });
@@ -815,8 +731,6 @@ async function saveToJson(data, filename) {
 
 /**
  * Save URLs to file for later reference
- * @param {Object} urlCategories - Categorized URLs
- * @returns {Promise<void>}
  */
 async function saveUrlsToFile(urlCategories) {
   const urlsPath = path.join(CONFIG.outputDir, 'urls.json');
@@ -832,23 +746,19 @@ async function main() {
   try {
     console.log('Starting Clash of Clans Wiki scraper...');
     
-    // Ensure output directories exist
     await fs.ensureDir(CONFIG.outputDir);
     await fs.ensureDir(CONFIG.rawDir);
     
     console.log('Parsing sitemap...');
     const urlCategories = await parseSitemap();
     
-    // Save URLs for reference
     await saveUrlsToFile(urlCategories);
-    
-    // Print URL category summary
+
     console.log('\nURL Categories Summary:');
     for (const [category, urls] of Object.entries(urlCategories)) {
       console.log(`${category}: ${urls.length} URLs`);
     }
-    
-    // Process each category
+
     const categories = ['troops', 'defenses', 'spells', 'heroes'];
     
     for (const category of categories) {
@@ -861,8 +771,7 @@ async function main() {
       console.log(`\nProcessing ${category} (${urls.length} URLs)...`);
       
       const allData = [];
-      
-      // Process in batches
+
       for (let i = 0; i < urls.length; i += CONFIG.batchSize) {
         const batch = urls.slice(i, i + CONFIG.batchSize);
         console.log(`Processing batch ${Math.floor(i/CONFIG.batchSize) + 1}/${Math.ceil(urls.length/CONFIG.batchSize)}...`);
@@ -872,8 +781,7 @@ async function main() {
         
         console.log(`Processed ${allData.length}/${urls.length} ${category}`);
       }
-      
-      // Save data
+
       if (allData.length > 0) {
         await saveToJson(allData, `${category}.json`);
       } else {
@@ -888,5 +796,4 @@ async function main() {
   }
 }
 
-// Run the scraper
 main();
