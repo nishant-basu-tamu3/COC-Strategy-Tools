@@ -70,11 +70,24 @@ GitHub: https://github.com/nishant-basu-tamu3/COC-Strategy-Tools.git
    ```
 
 5. Process data and generate embeddings:
+
+   
+   Note : You will need [Ollama](https://ollama.com) installed on your local system to run this step.
+
+   
+   Pull the nomic-embed-text model by running:
+
+   
+   
+   ```
+   ollama pull nomic-embed-text
+   ```
+      
    ```
    npm run process
    ```
 
-6. Start the backend server:
+7. Start the backend server:
    ```
    npm run start
    ```
