@@ -178,13 +178,16 @@ class LexiconQueryTool(LangTool):
         logging.info(f"Creating embeddings for {len(self.chunks)} chunks...")
         embeddings = self.embedder.encode(self.chunks)
         
+        # Convert to numpy array and ensure float32
+        embeddings = np.array(embeddings).astype('float32')
+        
         # Build FAISS index
         dimension = embeddings.shape[1]
         self.index = faiss.IndexFlatIP(dimension)  # Inner product for cosine similarity
         
         # Normalize embeddings for cosine similarity
         faiss.normalize_L2(embeddings)
-        self.index.add(embeddings.astype('float32'))
+        self.index.add(embeddings)
         
         logging.info(f"Vector index built with {self.index.ntotal} embeddings")
     
@@ -225,10 +228,11 @@ class LexiconQueryTool(LangTool):
         
         # Embed query
         query_embedding = self.embedder.encode([search_query])
+        query_embedding = np.array(query_embedding).astype('float32')
         faiss.normalize_L2(query_embedding)
         
         # Search
-        scores, indices = self.index.search(query_embedding.astype('float32'), top_k)
+        scores, indices = self.index.search(query_embedding, top_k)
         
         # Format results
         results = []
